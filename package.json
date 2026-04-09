@@ -9,7 +9,7 @@
     "node": "npx hardhat node",
     "compile": "npx hardhat compile",
     "clean": "npx hardhat clean",
-    "build":"npm run deploy:concurrent"
+    "build":"npm run deploy:concurrent:sepolia"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.2.3",
