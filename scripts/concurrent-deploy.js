@@ -356,6 +356,11 @@ async function main() {
 
     log.info("\n📝 Contract Address has been automatically updated in config.js");
     log.info("✅ You can now use the app without manual configuration!");
+    
+    // In CI/Netlify environment, explicitly exit to prevent build from hanging
+    if (process.env.CI === "true" || process.env.NETLIFY === "true") {
+      process.exit(0);
+    }
   } catch (error) {
     log.error(`Orchestration failed: ${error.message}`);
     log.warning("Please check the error messages above and try again.");
