@@ -5,9 +5,9 @@
 const hre = require("hardhat");
 const ethers = hre.ethers;
 
-// ⚠️  IMPORTANT: Update this with your deployed contract address
+// ⚠️  IMPORTANT: Set CONTRACT_ADDRESS environment variable with your deployed contract address
 // Get it from running: npx hardhat run scripts/deploy.js --network localhost
-const CONTRACT_ADDRESS = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0" || ""; // Will use env var or you can hardcode it
+const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
 
 async function main() {
   if (!CONTRACT_ADDRESS) {

@@ -8,7 +8,8 @@
     "test": "npx hardhat test",
     "node": "npx hardhat node",
     "compile": "npx hardhat compile",
-    "clean": "npx hardhat clean"
+    "clean": "npx hardhat clean",
+    "build":"npm run deploy:concurrent"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.2.3",
