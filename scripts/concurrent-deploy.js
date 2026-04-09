@@ -194,11 +194,25 @@ function updateConfigFile(contractAddress, network) {
 }
 
 /**
- * Open a new terminal (platform-specific)
+ * Open a new terminal (platform-specific) or run headless in CI
  */
 function openNewTerminal(command, title) {
   const isWindows = os.platform() === "win32";
   const isMac = os.platform() === "darwin";
+  const isCIEnvironment = process.env.CI === "true" || process.env.NETLIFY === "true";
+
+  if (isCIEnvironment) {
+    // CI environment: Run headless without terminal
+    log.warning(`Running in CI environment (headless mode) - detaching ${title}`);
+    const [executable, ...args] = command.split(/\s+/);
+    spawn(executable, args, {
+      cwd: PROJECT_ROOT,
+      shell: true,
+      stdio: "ignore",
+      detached: true,
+    });
+    return;
+  }
 
   if (isWindows) {
     // Windows: Use 'start' command with new window
@@ -236,8 +250,18 @@ async function main() {
     // Step 1: Launch Hardhat Node
     log.step(1, "Launching Hardhat Node in new terminal...");
     const isWindows = os.platform() === "win32";
+    const isCIEnvironment = process.env.CI === "true" || process.env.NETLIFY === "true";
     
-    if (isWindows) {
+    if (isCIEnvironment) {
+      // CI environment: Run Hardhat headless (detached)
+      log.warning("Running in CI environment - launching Hardhat headless");
+      spawn("npx", ["hardhat", "node"], {
+        cwd: PROJECT_ROOT,
+        shell: true,
+        stdio: "ignore",
+        detached: true,
+      });
+    } else if (isWindows) {
       // Windows: Launch in new cmd window
       spawn("cmd.exe", [
         "/c",
@@ -248,7 +272,7 @@ async function main() {
         detached: true,
       });
     } else {
-      // Unix: Launch in background
+      // Unix: Launch in terminal (requires gnome-terminal, xterm, etc.)
       openNewTerminal("npx hardhat node", "Hardhat Node [Terminal 1]");
     }
 
