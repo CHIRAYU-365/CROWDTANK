@@ -9,12 +9,12 @@
 
 // ⚠️  MUST UPDATE with actual deployed contract address
 // Replace with your real contract address from deployment
-export const CONTRACT_ADDRESS = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+export const CONTRACT_ADDRESS = "0x68Bf60B8065c8B0b8538e3B8546217Bb6ac52Bf1";
 
-export const CHAIN_ID = 31337; // Hardhat localhost chain ID (1 for Ethereum mainnet, 11155111 for Sepolia)
+export const CHAIN_ID = 11155111; // Hardhat localhost chain ID (1 for Ethereum mainnet, 11155111 for Sepolia)
 
-export const CHAIN_NAME = "Hardhat (Localhost)";
-export const NETWORK_RPC = "http://127.0.0.1:8545";
+export const CHAIN_NAME = "Sepolia";
+export const NETWORK_RPC = "https://sepolia.infura.io/v3/YOUR_INFURA_KEY";
 
 // Add check for contract address
 if (CONTRACT_ADDRESS === "0x0" || CONTRACT_ADDRESS === "0x") {
