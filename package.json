@@ -10,7 +10,8 @@
     "compile": "npx hardhat compile",
     "clean": "npx hardhat clean",
     "build:frontend": "cd frontend && npm install && npm run build",
-    "build":"npm run deploy:concurrent:sepolia && npm run build:frontend"
+    "build":"npm run deploy:concurrent:sepolia && npm run build:frontend",
+    "build:vercel": "cd frontend && npm install && npm run build"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.2.3",

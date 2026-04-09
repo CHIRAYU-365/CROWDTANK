@@ -1,0 +1,15 @@
+{
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/build",
+  "env": [
+    "SEPOLIA_RPC",
+    "ETHERSCAN_API_KEY",
+    "CONTRACT_ADDRESS"
+  ],
+  "redirects": [
+    {
+      "source": "/:path((?!_next/static|_next/image|favicon.ico).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
