@@ -7,6 +7,7 @@ export const WalletConnect = ({ onAccountChange }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isBalanceLoading, setIsBalanceLoading] = useState(false);
+  const [showReconnectPrompt, setShowReconnectPrompt] = useState(false);
 
   useEffect(() => {
     checkConnectedAccount();
@@ -85,6 +86,7 @@ export const WalletConnect = ({ onAccountChange }) => {
       setAccount(connectedAccount);
       await fetchBalance(connectedAccount);
       onAccountChange(connectedAccount);
+      setShowReconnectPrompt(false);
     } catch (error) {
       const message = error.message || "Failed to connect wallet";
       console.error("Connection error:", error);
@@ -124,6 +126,11 @@ export const WalletConnect = ({ onAccountChange }) => {
 
   return (
     <div className="space-y-2">
+      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+        <p className="text-sm text-yellow-700 font-medium">
+          ⚠️ Wallet not connected
+        </p>
+      </div>
       <button
         onClick={handleConnect}
         disabled={isLoading}

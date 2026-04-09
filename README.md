@@ -544,6 +544,37 @@ Complexity: O(1) - string matching
 
 ## 📦 Installation & Setup
 
+### ⚡ Quick Start (RECOMMENDED)
+
+**Everything automated in ONE command!**
+
+```bash
+# Install dependencies first (one-time setup)
+npm install
+cd frontend && npm install && cd ..
+
+# Then run concurrent deployment:
+npm run deploy:concurrent
+
+# ✅ All of this happens automatically:
+# - Terminal 1: Hardhat node launches
+# - Terminal 2: Smart contract deploys
+# - Contract address auto-configured
+# - Terminal 3: React frontend launches
+# - Browser opens: http://localhost:3000
+# - Total time: 2-3 minutes
+```
+
+**For Sepolia testnet:**
+```bash
+npm run deploy:concurrent:sepolia
+# (Requires .env with SEPOLIA_RPC and PRIVATE_KEY)
+```
+
+**See:** [CONCURRENT_DEPLOYMENT.md](CONCURRENT_DEPLOYMENT.md) for complete details.
+
+---
+
 ### Prerequisites
 
 ```bash
@@ -587,19 +618,20 @@ npm install
 # - react-scripts 5.0.1
 ```
 
-### Step 4: Environment Configuration
+### Step 4: Environment Configuration (Sepolia/Mainnet Only)
 
 ```bash
 # Back to project root
 cd ..
 
-# Create .env file
+# Create .env file (only needed for Sepolia/Mainnet)
 cp .env.example .env
 
 # Edit .env with your values:
 # SEPOLIA_RPC=https://sepolia.infura.io/v3/YOUR_KEY
 # PRIVATE_KEY=your_private_key_hex
 # ETHERSCAN_API_KEY=your_etherscan_key
+# (Not needed for localhost development)
 ```
 
 ### Step 5: Verify Installation
@@ -618,7 +650,27 @@ npm test
 
 ## 🎮 Usage Guide
 
-### Local Development Workflow
+### Recommended: Concurrent Deployment (Automated)
+
+The easiest way - launches everything automatically:
+
+```bash
+npm run deploy:concurrent          # Localhost
+npm run deploy:concurrent:sepolia  # Sepolia testnet
+```
+
+**This will:**
+1. Launch Hardhat node in Terminal 1
+2. Deploy contract in Terminal 2
+3. Auto-update config with contract address
+4. Start frontend in Terminal 3
+5. Open http://localhost:3000
+
+---
+
+### Alternative: Manual Deployment (Learning)
+
+If you prefer to learn the process or need more control:
 
 #### Terminal 1: Start Hardhat Node
 

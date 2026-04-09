@@ -9,11 +9,12 @@
 
 // ⚠️  MUST UPDATE with actual deployed contract address
 // Replace with your real contract address from deployment
-export const CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+export const CONTRACT_ADDRESS = "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9";
 
 export const CHAIN_ID = 31337; // Hardhat localhost chain ID (1 for Ethereum mainnet, 11155111 for Sepolia)
 
 export const CHAIN_NAME = "Hardhat (Localhost)";
+export const NETWORK_RPC = "http://127.0.0.1:8545";
 
 // Add check for contract address
 if (CONTRACT_ADDRESS === "0x0" || CONTRACT_ADDRESS === "0x") {

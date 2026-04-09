@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CreateProject } from "./components/CreateProject";
 import { FundModal } from "./components/FundModal";
 import { ProjectCard } from "./components/ProjectCard";
 import { WalletConnect } from "./components/WalletConnect";
-import { adminWithdrawFunds, userWithdrawFunds } from "./utils/contractInteraction";
+import { adminWithdrawFunds, connectWallet, userWithdrawFunds } from "./utils/contractInteraction";
 
 export const App = () => {
   const [account, setAccount] = useState(null);
@@ -12,8 +12,33 @@ export const App = () => {
   const [withdrawLoading, setWithdrawLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("success");
+  const [autoConnectTriggered, setAutoConnectTriggered] = useState(false);
+
+  // Auto-trigger wallet connection on app load
+  useEffect(() => {
+    if (!autoConnectTriggered && window.ethereum) {
+      const autoConnect = async () => {
+        try {
+          // Automatically request wallet connection when app loads
+          await connectWallet();
+          setAutoConnectTriggered(true);
+        } catch (error) {
+          // User declined connection or error occurred - that's okay, they can click button
+          console.log("Auto-connect: User interaction needed or wallet not available");
+          setAutoConnectTriggered(true);
+        }
+      };
+      
+      autoConnect();
+    }
+  }, [autoConnectTriggered]);
 
   const handleAccountChange = (newAccount) => {
+    if (newAccount && !account) {
+      showMessage("✓ Wallet connected successfully!", "success");
+    } else if (!newAccount && account) {
+      showMessage("⚠ Wallet disconnected. Please reconnect to continue.", "error");
+    }
     setAccount(newAccount);
   };
 
@@ -108,6 +133,18 @@ export const App = () => {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        {/* Wallet Connection Required Banner */}
+        {!account && (
+          <div className="mb-8 rounded-lg p-6 border-2 border-yellow-300 bg-yellow-50 text-center">
+            <p className="text-lg font-semibold text-yellow-800 mb-2">
+              🔐 Wallet Connection Required
+            </p>
+            <p className="text-yellow-700 mb-4">
+              Please connect your wallet to access all features and create or fund projects.
+            </p>
+          </div>
+        )}
+
         {/* Message Alert */}
         {message && (
           <div
