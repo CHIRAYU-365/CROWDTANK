@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fundProject, getBalance } from "../utils/contractInteraction";
 
 export const FundModal = ({ projectId, projectName, onClose, onSuccess }) => {
@@ -24,7 +24,7 @@ export const FundModal = ({ projectId, projectName, onClose, onSuccess }) => {
     }
   };
 
-  useState(() => {
+  useEffect(() => {
     loadAccountBalance();
   }, []);
 

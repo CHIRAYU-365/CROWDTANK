@@ -224,7 +224,7 @@ export const ProjectCard = ({ projectId, account, onFundClick, onWithdrawClick }
           </button>
         )}
 
-        {!isDeadlinePassed && isDeadlinePassed && (
+        {isDeadlinePassed && (
           <div className="w-full text-center">
             <p className="text-sm text-gray-500">
               {project.funded ? "Project funded! Awaiting claim." : "Project failed. Refunds available."}
