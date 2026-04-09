@@ -9,7 +9,7 @@
     "node": "npx hardhat node",
     "compile": "npx hardhat compile",
     "clean": "npx hardhat clean",
-    "build:frontend": "cd frontend && npm run build",
+    "build:frontend": "cd frontend && npm install && npm run build",
     "build":"npm run deploy:concurrent:sepolia && npm run build:frontend"
   },
   "devDependencies": {
